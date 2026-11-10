@@ -1,6 +1,7 @@
 import './style.css'
-import type { Booking } from './models/booking'; 
+import type { Booking } from './models/booking';
 import { countSeats } from './lib/count-seats';
+import workshopUrl from './assets/workshop.svg';
 
 const initialBookings: Booking[] = [
   { id: 'b1', name: 'Анна', seats: 1, status: 'confirmed', source: 'web' },
@@ -45,6 +46,10 @@ if (!(form instanceof HTMLFormElement) || !(list instanceof HTMLUListElement)
   || !(logo instanceof HTMLImageElement)) {
   throw new Error('Не найдены элементы интерфейса')
 }
+
+logo.src = workshopUrl;
+logo.hidden = false;
+logo.alt = 'Логотип мастерской'; 
 
 function render(items: Booking[], target: HTMLUListElement, counter: HTMLElement) {
   target.replaceChildren()
