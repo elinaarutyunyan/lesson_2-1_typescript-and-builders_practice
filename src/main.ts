@@ -1,20 +1,23 @@
 import './style.css'
 
-// А1: замените выведенный тип Booking явным interface и добавьте BookingStatus.
-const initialBookings = [
+type BookingStatus = 'new' | 'confirmed';
+interface Booking {
+  id: string;
+  name: string;
+  seats: number;
+  status: BookingStatus;
+}
+const initialBookings: Booking[] = [
   { id: 'b1', name: 'Анна', seats: 1, status: 'confirmed' },
   { id: 'b2', name: 'Илья', seats: 1, status: 'new' },
 ]
-type Booking = (typeof initialBookings)[number]
+
 const bookings: Array<Booking> = [...initialBookings]
 
-// А2: явно задайте Booking[] и тип результата, считайте сумму seats.
 function countSeats(items: typeof initialBookings) {
   return items.length
 }
 
-// А3: пока каждая заявка означает одного участника.
-// Замените тело проверкой raw и преобразованием в целое число от 1 до 5.
 function readSeats(raw: FormDataEntryValue | null): number | null {
   void raw
   return 1
@@ -49,7 +52,6 @@ if (!(form instanceof HTMLFormElement) || !(list instanceof HTMLUListElement)
   || !(logo instanceof HTMLImageElement)) {
   throw new Error('Не найдены элементы интерфейса')
 }
-// Б3: импортируйте картинку, задайте logo.src и logo.hidden = false.
 
 function render(items: Booking[], target: HTMLUListElement, counter: HTMLElement) {
   target.replaceChildren()
@@ -58,7 +60,6 @@ function render(items: Booking[], target: HTMLUListElement, counter: HTMLElement
     const title = document.createElement('strong')
     title.textContent = booking.name
     const details = document.createElement('span')
-    // А4: добавьте source в эту строку после изменения модели.
     details.textContent = `${booking.seats} участн. · ${booking.status === 'confirmed' ? 'Подтверждена' : 'Новая'}`
     item.append(title, details)
     target.append(item)
